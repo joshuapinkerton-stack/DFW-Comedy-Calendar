@@ -185,7 +185,9 @@ function renderFeatured(events) {
 function renderFeaturedCard(event) {
   return `
     <article class="featured-card">
-      <img src="${escapeHtml(event.image)}" alt="" loading="lazy">
+      <div class="featured-card-media">
+        <img src="${escapeHtml(event.image)}" alt="" loading="lazy">
+      </div>
       <div class="featured-card-content">
         <span class="featured-badge">Featured pick</span>
         <h3>${escapeHtml(event.title)}</h3>
