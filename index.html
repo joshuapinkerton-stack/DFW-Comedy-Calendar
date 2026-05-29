@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="DFW Comedy Calendar highlights upcoming stand-up, improv, open mic, and live comedy events across Dallas-Fort Worth."
+    >
+    <title>DFW Comedy Calendar</title>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#events">Skip to events</a>
+
+    <header class="site-header">
+      <nav class="nav-shell" aria-label="Primary">
+        <a class="brand" href="#" aria-label="DFW Comedy Calendar home">
+          <span class="brand-mark" aria-hidden="true">DFW</span>
+          <span>Comedy Calendar</span>
+        </a>
+        <button class="theme-toggle" type="button" aria-pressed="false">
+          <span class="theme-icon" aria-hidden="true"></span>
+          <span class="theme-label">Dark</span>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Dallas-Fort Worth stand-up, improv, and live comedy</p>
+          <h1 id="page-title">DFW Comedy Calendar</h1>
+          <p class="hero-lede">
+            A curated, city-spanning look at upcoming comedy nights, club weekends,
+            showcases, and open mics around North Texas.
+          </p>
+          <div class="hero-meta" aria-live="polite">
+            <span id="upcomingSummary">Loading events...</span>
+            <span id="lastUpdated">Last updated loading...</span>
+          </div>
+        </div>
+
+        <div class="featured-panel" aria-labelledby="featured-title">
+          <div class="section-kicker">
+            <span id="featured-title">Featured Events</span>
+            <span id="featuredCount">0 picks</span>
+          </div>
+          <div class="featured-grid" id="featuredEvents"></div>
+        </div>
+      </section>
+
+      <section class="filters-section" aria-labelledby="filters-title">
+        <div class="filters-shell">
+          <div class="filters-heading">
+            <h2 id="filters-title">Find a Show</h2>
+            <p id="resultCount" aria-live="polite">Loading events...</p>
+          </div>
+
+          <form class="filters" id="filtersForm">
+            <div class="field field-search">
+              <label for="searchInput">Search</label>
+              <input
+                id="searchInput"
+                name="search"
+                type="search"
+                placeholder="Comedian, venue, tag..."
+                autocomplete="off"
+              >
+            </div>
+
+            <div class="field">
+              <label for="cityFilter">City</label>
+              <select id="cityFilter" name="city">
+                <option value="">All cities</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="venueFilter">Venue</label>
+              <select id="venueFilter" name="venue">
+                <option value="">All venues</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="dateRangeFilter">Date</label>
+              <select id="dateRangeFilter" name="dateRange">
+                <option value="all">Any upcoming date</option>
+                <option value="today">Today</option>
+                <option value="weekend">This weekend</option>
+                <option value="7">Next 7 days</option>
+                <option value="30">Next 30 days</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="priceFilter">Price</label>
+              <select id="priceFilter" name="price">
+                <option value="all">Any price</option>
+                <option value="free">Free</option>
+                <option value="under20">Under $20</option>
+                <option value="20to40">$20-$40</option>
+                <option value="40plus">$40+</option>
+              </select>
+            </div>
+
+            <button class="clear-button" type="reset">Clear</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="events-section" id="events" aria-labelledby="events-title">
+        <div class="section-heading">
+          <p class="eyebrow">Upcoming in DFW</p>
+          <h2 id="events-title">Comedy Events</h2>
+        </div>
+        <div class="events-grid" id="eventsGrid"></div>
+        <div class="empty-state" id="emptyState" hidden>
+          <p class="empty-title">No shows match those filters.</p>
+          <p>Try widening the date range, clearing the venue, or searching a nearby city.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        Mock event data for a static GitHub Pages demo. Always confirm details with the
+        linked source before heading out.
+      </p>
+    </footer>
+  </body>
+</html>
