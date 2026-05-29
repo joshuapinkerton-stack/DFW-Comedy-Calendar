@@ -14,6 +14,7 @@ const elements = {
   venueFilter: document.querySelector("#venueFilter"),
   dateRangeFilter: document.querySelector("#dateRangeFilter"),
   priceFilter: document.querySelector("#priceFilter"),
+  quickChips: document.querySelectorAll(".quick-chip"),
   featuredEvents: document.querySelector("#featuredEvents"),
   featuredCount: document.querySelector("#featuredCount"),
   eventsGrid: document.querySelector("#eventsGrid"),
@@ -193,9 +194,14 @@ function renderFeaturedCard(event) {
     <article class="featured-card">
       <img src="${escapeHtml(event.image)}" alt="" loading="lazy">
       <div class="featured-card-content">
+        <span class="featured-badge">Featured pick</span>
         <h3>${escapeHtml(event.title)}</h3>
-        <p>${escapeHtml(event.dateDisplay)} · ${escapeHtml(event.city)}</p>
-        <p>${escapeHtml(event.priceDisplay)}</p>
+        <div class="featured-meta">
+          <span class="event-date">${escapeHtml(event.dateDisplay)}</span>
+          <span class="event-price">${escapeHtml(event.priceDisplay)}</span>
+        </div>
+        <p>${escapeHtml(event.venue)} in ${escapeHtml(event.city)}</p>
+        <span class="source-badge">Source: ${escapeHtml(event.source)}</span>
       </div>
     </article>
   `;
@@ -218,7 +224,11 @@ function renderEventCard(event) {
       </div>
       <div class="event-card-body">
         <div>
-          <p class="event-date">${escapeHtml(event.dateDisplay)} · ${escapeHtml(event.timeDisplay)}</p>
+          <div class="event-topline">
+            <span class="event-date">${escapeHtml(event.dateDisplay)}</span>
+            <span class="event-time">${escapeHtml(event.timeDisplay)}</span>
+            <span class="event-price">${escapeHtml(event.priceDisplay)}</span>
+          </div>
           <h3>${escapeHtml(event.title)}</h3>
         </div>
         <p class="event-description">${escapeHtml(event.description)}</p>
@@ -231,18 +241,42 @@ function renderEventCard(event) {
             <dt>City</dt>
             <dd>${escapeHtml(event.city)}</dd>
           </div>
-          <div>
-            <dt>Cost</dt>
-            <dd>${escapeHtml(event.priceDisplay)}</dd>
-          </div>
         </dl>
         <div class="tags" aria-label="Tags">${tags}</div>
         <a class="source-link" href="${escapeHtml(event.sourceUrl)}" target="_blank" rel="noopener noreferrer">
-          View source at ${escapeHtml(event.source)}
+          <span>Verified source</span>
+          <strong>${escapeHtml(event.source)}</strong>
         </a>
       </div>
     </article>
   `;
+}
+
+function setQuickFilter(filter) {
+  elements.searchInput.value = "";
+  elements.cityFilter.value = "";
+  elements.venueFilter.value = "";
+  elements.dateRangeFilter.value = "all";
+  elements.priceFilter.value = "all";
+
+  if (filter === "weekend") {
+    elements.dateRangeFilter.value = "weekend";
+  }
+
+  if (filter === "free") {
+    elements.priceFilter.value = "free";
+  }
+
+  if (filter === "fort-worth") {
+    elements.cityFilter.value = "Fort Worth";
+  }
+
+  elements.quickChips.forEach((chip) => {
+    chip.classList.toggle("is-active", chip.dataset.quickFilter === filter);
+  });
+
+  applyFilters();
+  document.querySelector("#events").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function setTheme(theme) {
@@ -295,7 +329,12 @@ elements.themeToggle.addEventListener("click", () => {
 
 elements.filtersForm.addEventListener("input", applyFilters);
 elements.filtersForm.addEventListener("reset", () => {
+  elements.quickChips.forEach((chip) => chip.classList.remove("is-active"));
   requestAnimationFrame(applyFilters);
+});
+
+elements.quickChips.forEach((chip) => {
+  chip.addEventListener("click", () => setQuickFilter(chip.dataset.quickFilter));
 });
 
 initTheme();

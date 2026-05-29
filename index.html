@@ -41,6 +41,21 @@
             <span id="upcomingSummary">Loading events...</span>
             <span id="lastUpdated">Last updated loading...</span>
           </div>
+          <p class="data-note">
+            Mock event data for a static GitHub Pages demo. Confirm details with
+            the linked source before heading out.
+          </p>
+          <div class="quick-actions" aria-label="Quick filters">
+            <button type="button" class="quick-chip" data-quick-filter="weekend">
+              This weekend
+            </button>
+            <button type="button" class="quick-chip" data-quick-filter="free">
+              Free shows
+            </button>
+            <button type="button" class="quick-chip" data-quick-filter="fort-worth">
+              Fort Worth picks
+            </button>
+          </div>
         </div>
 
         <div class="featured-panel" aria-labelledby="featured-title">
@@ -114,8 +129,8 @@
 
       <section class="events-section" id="events" aria-labelledby="events-title">
         <div class="section-heading">
-          <p class="eyebrow">Upcoming in DFW</p>
-          <h2 id="events-title">Comedy Events</h2>
+          <p class="eyebrow">Upcoming shows</p>
+          <h2 id="events-title">Browse the Calendar</h2>
         </div>
         <div class="events-grid" id="eventsGrid"></div>
         <div class="empty-state" id="emptyState" hidden>
@@ -126,10 +141,7 @@
     </main>
 
     <footer class="site-footer">
-      <p>
-        Mock event data for a static GitHub Pages demo. Always confirm details with the
-        linked source before heading out.
-      </p>
+      <p>Built as a static, GitHub Pages-friendly comedy calendar.</p>
     </footer>
   </body>
 </html>
