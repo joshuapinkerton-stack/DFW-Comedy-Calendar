@@ -11,7 +11,6 @@ const elements = {
   filtersForm: document.querySelector("#filtersForm"),
   searchInput: document.querySelector("#searchInput"),
   cityFilter: document.querySelector("#cityFilter"),
-  venueFilter: document.querySelector("#venueFilter"),
   dateRangeFilter: document.querySelector("#dateRangeFilter"),
   priceFilter: document.querySelector("#priceFilter"),
   quickChips: document.querySelectorAll(".quick-chip"),
@@ -74,12 +73,8 @@ function escapeHtml(value) {
 
 function populateFilters(events) {
   const cities = uniqueSorted(events.map((event) => event.city));
-  const venues = uniqueSorted(events.map((event) => event.venue));
 
   elements.cityFilter.innerHTML = `<option value="">All cities</option>${cities
-    .map(optionMarkup)
-    .join("")}`;
-  elements.venueFilter.innerHTML = `<option value="">All venues</option>${venues
     .map(optionMarkup)
     .join("")}`;
 }
@@ -144,7 +139,6 @@ function eventMatchesPrice(event, priceBand) {
 function applyFilters() {
   const query = normalize(elements.searchInput.value);
   const city = elements.cityFilter.value;
-  const venue = elements.venueFilter.value;
   const dateRange = elements.dateRangeFilter.value;
   const priceBand = elements.priceFilter.value;
 
@@ -152,7 +146,6 @@ function applyFilters() {
     return (
       eventMatchesSearch(event, query) &&
       (!city || event.city === city) &&
-      (!venue || event.venue === venue) &&
       eventMatchesDateRange(event, dateRange) &&
       eventMatchesPrice(event, priceBand)
     );
@@ -255,7 +248,6 @@ function renderEventCard(event) {
 function setQuickFilter(filter) {
   elements.searchInput.value = "";
   elements.cityFilter.value = "";
-  elements.venueFilter.value = "";
   elements.dateRangeFilter.value = "all";
   elements.priceFilter.value = "all";
 
